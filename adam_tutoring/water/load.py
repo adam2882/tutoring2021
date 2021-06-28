@@ -7,5 +7,14 @@ def load_stations():
 	with open('water/data/stations.csv', newline='') as csvfile:
 		reader = csv.DictReader(csvfile)
 		for row in reader:
-                    print(row)
-                    # TODO: insert code to create Station objects from each row and save to database
+			if row['LATITUDE'] == '' or row['LONGITUDE'] == '':
+				print(row)
+			else:
+				station = Station(
+					id=row['STATION_ID'], 
+					name=row['STATION_NAME'], 
+					station_type=row['STATION_TYPE'], 
+					latitude=row['LATITUDE'], 
+					longitude=row['LONGITUDE'], 
+					county=row['COUNTY_NAME'])
+				station.save()
