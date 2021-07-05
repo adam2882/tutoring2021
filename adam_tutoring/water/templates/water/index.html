@@ -1,0 +1,9 @@
+{% if station_results %}
+    <ul>
+    {% for station in station_results %}
+        <li><a href="/water/{{ station.id }}/">{{ station.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No water data is available.</p>
+{% endif %}
