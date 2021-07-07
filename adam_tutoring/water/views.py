@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from .models import Station
+from django.views.generic.base import TemplateView
 
 def index(request):
     station_results = Station.objects.all()
@@ -20,3 +21,6 @@ def index(request):
 def station_details(request, station_id):
     station = Station.objects.get(pk=station_id)
     return HttpResponse(station.name)
+
+class StationsMapView(TemplateView):
+    template_name = "map.html"
