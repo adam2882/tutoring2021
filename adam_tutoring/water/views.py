@@ -3,6 +3,9 @@ from django.http import HttpResponse
 from django.template import loader
 from .models import Station
 from django.views.generic.base import TemplateView
+import json
+from django.core.serializers import serialize
+
 
 def index(request):
     station_results = Station.objects.all()
@@ -24,3 +27,9 @@ def station_details(request, station_id):
 
 class StationsMapView(TemplateView):
     template_name = "map.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["stations"] = json.loads(serialize("geojson", Station.objects.all()))
+        return context
+

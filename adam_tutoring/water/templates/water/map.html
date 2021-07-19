@@ -9,6 +9,7 @@
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 </head>
 <body>
+  {{ stations|json_script:"stations-data" }}
   <div id="map"></div>
   <script src="{% static 'map.js' %}"></script>
 </body>

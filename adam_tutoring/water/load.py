@@ -1,5 +1,6 @@
 from .models import Station, LabResult
 import csv
+from django.contrib.gis.geos import Point
 
 
 def load_stations():
@@ -63,3 +64,8 @@ def load_lab_results():
 						)
 					result.save()
 
+def load_points():
+	for station in Station.objects.all():
+		location = Point(station.longitude, station.latitude)
+		station.location = location
+		station.save()

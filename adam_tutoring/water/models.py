@@ -1,5 +1,5 @@
 from django.contrib.gis.db import models
-from django.contrib.gis.db import PointField
+from django.contrib.gis.db.models import PointField
 
 class Station(models.Model):
 	id = models.IntegerField(primary_key=True)
@@ -8,7 +8,7 @@ class Station(models.Model):
 	latitude = models.FloatField()
 	longitude = models.FloatField()
 	county = models.CharField(max_length=30)
-	location = PointField()
+	location = PointField(null=True)
 
 class LabResult(models.Model): 
 	station = models.ForeignKey(Station, on_delete=models.CASCADE)
@@ -22,3 +22,5 @@ class LabResult(models.Model):
 	reporting_limit = models.FloatField(null=True)
 	units = models.CharField(max_length=20)
 	method_name = models.CharField(max_length=100)
+
+
